@@ -7,4 +7,3 @@ Partial Storyline relation datadata download address: https://cloud.tsinghua.edu
 
 We only provide some of the storyline relation data because this dataset is currently used by a contest https://github.com/THU-KEG/CCL2022_Storyline_Relationship_Classification. We will provide all labeled storyline relation data after the contest ends.
 
-RunClusters.py provides differen
