@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>NewsMiner Story Tree Demo</title>
+  <link rel="stylesheet" href="https://unpkg.com/antd@4.16.13/dist/antd.min.css" />
+</head>
+
+<body>
+  <div id="app"></div>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+  <script crossorigin src="https://unpkg.com/@ant-design/charts@1.2.14/dist/graphs.min.js"></script>
+  <script crossorigin src="https://unpkg.com/antd@4.16.13/dist/antd.min.js"></script>
+  <script type="text/babel">
+    const { useState } = React
+    const { Upload, Button, Row, Col, List } = antd
+    function dfs(root) {
+      if (!('val' in root)) {
+        return
+      }
+      if (root.val) {
+        root.value = root.val
+        for (const k in root.val) {
+          if (k !== 'title') {
+            delete root.val[k]
+          }
+        }
+      }
+      delete root.val
+      root.children.forEach(dfs)
+    }
+    function App() {
+      const [storyID, setStoryID] = useState(0)
+      const [stories, setStories] = useState([{}])
+      const config = {
+        data: stories[storyID],
+        layout: {
+          //type: 'indented',
+          direction: 'LR',
+          //dropCap: false,
+          indent: 30,
+          getHeight: () => {
+            return 30;
+          },
+          getWidth: () => {
+            return 300;
+          },
+          getHGap: () => {
+            return 30;
+          },
+        },
+        nodeCfg: {
+          size: [300, 40]
+        },
+        markerCfg: {
+          show: true,
+        },
+        behaviors: ['drag-canvas', 'zoom-canvas', 'drag-node'],
+        height: 1000,
+      };
+
+      return <Row>
+        <Col span={2}>
+          <h1>NewsMiner Story Tree Demo</h1>
+          <Upload
+            maxCount={1}
+            beforeUpload={file => {
+              const reader = new FileReader()
+              reader.onload = () => {
+                const data = JSON.parse(reader.result)
+                data.forEach(dfs)
+                setStories(data)
+                console.log(data)
+              }
+              reader.readAsText(file)
+              return false
+            }}
+          >
+            <Button>Click to Upload</Button>
+          </Upload>
+          <List
+            dataSource={stories.map((x, id) => ({ id, ...x }))}
+            renderItem={item => <List.Item
+              onClick={() => setStoryID(item.id)}
+            >event-{item.id}-{item.value?.title}</List.Item>}
+          />
+        </Col>
+        <Col span={22}>
+          <graphs.DecompositionTreeGraph {...config} />
+        </Col>
+      </Row>
+    }
+    ReactDOM.render(<App />, document.querySelector('#app'))
+  </script>
+</body>
+
+</html>
