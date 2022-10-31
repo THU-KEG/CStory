@@ -1,7 +1,7 @@
 # CStory
 Data resource of CStory
 
-News data download address：
+News data download address：下载链接
 Link: https://caiyun.139.com/m/i?165CdXGgk7bdF  
-Extracted code:5Bpx  
+Extracted code提取码:5Bpx  
 
