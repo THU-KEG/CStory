@@ -1,0 +1,1 @@
+output/key_sentence_bert/base/epoch_9_dev_72.3_test_73.6_train_95.7.ckpt
