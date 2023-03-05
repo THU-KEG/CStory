@@ -59,7 +59,7 @@ python binary_classification/model_bert_finetune/train.py  --template_type base 
 
 cd CStory #进入根目录
 
-#load_path是你自己生成模型的路径
+### load_path是你自己生成模型的路径
 
 python binary_classification/model_bert_finetune/test.py --test_data_path dataset/A_test.tsv   --load_path  包含关键句的测试文件的路径
 
