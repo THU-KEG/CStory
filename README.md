@@ -38,7 +38,8 @@ cd CStory #进入根目录
 python binary_classification/model_bert_finetune/train.py  --template_type base --train_data_path dataset/key_sentence_train.tsv  --dev_data_path dataset/key_sentence_dev.tsv --test_data_path dataset/key_sentence_test.tsv --out_dir output/key_sentence_bert   --model_path bert-base-chinese
 
 # RoBERTa
-cd CStory #进入根目录
+cd CStory 
+# 进入新闻脉络关系分类的根目录
 python binary_classification/model_bert_finetune/train.py  --template_type base --train_data_path dataset/key_sentence_train.tsv  --dev_data_path dataset/key_sentence_dev.tsv  --test_data_path dataset/key_sentence_test.tsv --out_dir output/key_sentence_roberta   --model_path hfl/chinese-roberta-wwm-ext
 
 # 获取模型在测试集上的效果
